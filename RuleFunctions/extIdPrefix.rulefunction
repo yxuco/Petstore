@@ -1,0 +1,27 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.extIdPrefix {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String conceptName;
+	}
+	body {
+		if (conceptName == "Product") {
+			return "PROD:";
+		} else if (conceptName == "Inventory") {
+			return "INV:";
+		} else if (conceptName == "Admin") {
+			return "ADMIN";
+		} else if (conceptName == "ShoppingCart") {
+			return "CART:";
+		} else if (conceptName == "User") {
+			return "USER:";
+		} else if (conceptName == "InventoryAlert") {
+			return "ALERT:";
+		}
+		return "";
+	}
+}

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+String[] rulefunction RuleFunctions.productList {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		return String[]{"5348529","5348538","5348534","5349265","5349240","5348531","5348537","5348536","5116698","5307243","5285954","5286046"};
+	}
+}

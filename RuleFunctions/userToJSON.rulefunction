@@ -1,0 +1,27 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.userToJSON {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.User user;
+	}
+	body {
+		Object buff = String.createBuffer(300);
+		String.append(buff, String.format("{\"name\":\"%s\",", user.name));
+		String.append(buff, String.format("\"status\":\"%s\",", user.status));
+		String.append(buff, String.format("\"rewards\":%d,", user.rewardPoints));
+		String.append(buff, String.format("\"orders\":%d,", user.orders@length));
+		String.append(buff, "\"coupons\":[");
+		for (int i = 0; i < user.coupons@length; i++) {
+			String.append(buff, String.format("\"%s\"", RuleFunctions.couponToString(user.coupons[i])));
+			if (i != user.coupons@length-1) {
+				String.append(buff, ",");
+			}
+		}
+		String.append(buff, "]}");
+		return String.convertBufferToString(buff);
+	}
+}

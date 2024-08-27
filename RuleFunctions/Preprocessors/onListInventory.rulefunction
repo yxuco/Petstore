@@ -1,0 +1,18 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Preprocessors.onListInventory {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.ListInventory evt;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.Preprocessors.onListInventory");
+		String[] skus = RuleFunctions.productList();
+		Log.log(logger, "info", "List %d inventory items", skus@length);
+		Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null, RuleFunctions.inventoryToJSON(skus), "200"));
+		Event.consumeEvent(evt);
+	}
+}

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction VirtualRF.InventoryThresholdVRF {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		VirtualRF.InventoryData v;
+	}
+	body {
+		
+	}
+}

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+virtual void rulefunction VirtualRF.userStatusVRF {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		VirtualRF.UserData u;
+	}
+	body {
+		
+	}
+}

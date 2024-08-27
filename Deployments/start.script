@@ -1,0 +1,26 @@
+#!/bin/zsh
+#
+# start test engine
+# ./start.sh [inf|cache]
+WS=/Users/yxu/work/proj
+CDD=Deployments/Petstore.cdd
+EAR=./Petstore.ear
+
+PU=$1
+if  [ -z "$1" ]; then
+  PU=default
+fi
+echo "start PU $PU"
+
+ENG=$PU
+if [ "$ENG" = "cache" ]; then
+  SEQ=$2
+  if [ -z "$2" ]; then
+    SEQ=0
+  fi
+  ENG="${PU}-${SEQ}"
+fi
+echo "engine name $ENG"
+
+BE_HOME=$HOME/tibco/be63/be/6.3
+$BE_HOME/bin/be-engine --propFile ./be-engine.tra --propVar jmx_port=9555 -n $ENG -u $PU -c ${WS}/Petstore/$CDD ${EAR}

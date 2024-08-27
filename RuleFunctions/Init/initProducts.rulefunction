@@ -1,0 +1,31 @@
+/**
+ * @description 
+ */
+String[] rulefunction RuleFunctions.Init.initProducts {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.Init.initProducts");
+		Log.log(logger, "info", "Initialize products");
+		
+		String prefix = RuleFunctions.extIdPrefix("Product");
+		Concepts.Product.Product(prefix+"5348529","5348529","Dentley's Nature's Chews Chicken Wings Dog Chew","Dentley's",4.0,"2",2.0);
+		Concepts.Product.Product(prefix+"5348538","5348538","Dentley's Pretzel Chicken Flavor Rawhide Alternative Dog Chew","Dentley's",3.5,"1",4.0);
+		Concepts.Product.Product(prefix+"5348534","5348534","Wiggles & Wags Dipped Slices Banana with Chicken & Peanut Butter","Wiggles & Wags",5.0,"2 oz",3.0);
+		Concepts.Product.Product(prefix+"5349265","5349265","Wiggles & Wags Cinnamon Vanilla Flavor Cookie Dog Treat","Wiggles & Wags",5.0,"1",3.0);
+		Concepts.Product.Product(prefix+"5349240","5349240","Wiggles & Wags Cinnamon Vanilla Flavor Black & White Cookie Dog Treat","Wiggles & Wags",0.0,"1",3.0);
+		Concepts.Product.Product(prefix+"5348531","5348531","Dentley's Rawhide Bagel Chicken Flavor Dog Chew 1 Count 4 OZ","Dentley's",5.0,"4 oz",4.0);
+		Concepts.Product.Product(prefix+"5348537","5348537","Dentley's Churros Cinnamon Flavor Rawhide Alternative Dog Chew","Dentley's",5.0,"2",3.0);
+		Concepts.Product.Product(prefix+"5348536","5348536","Wiggles & Wags Chicken & Rice Protein Balls","Wiggles & Wags",4.0,"2 oz",3.0);
+		Concepts.Product.Product(prefix+"5116698","5116698","Milk-Bone Soft & Chewy All Life Stage Dog Treats - Filet Mignon","Milk Bone",4.5,"25 oz",18.99);
+		Concepts.Product.Product(prefix+"5307243","5307243","Great Choice® Dog Wrapped Treat - Chicken & Sweet Potato","Great Choice",5.0,"32 oz",25.99);
+		Concepts.Product.Product(prefix+"5285954","5285954","Simply Nourish® Original Soft Chews Dog Treat - Bacon & Cheese","Simply Nourish",5.0,"6 oz",6.99);
+		Concepts.Product.Product(prefix+"5286046","5286046","Simply Nourish® Soft Chews Original Dog Protein Stick Treat - Chicken & Cheese","Simply Nourish",5.0,"6 oz",6.99);
+
+		return RuleFunctions.productList();
+	}
+}

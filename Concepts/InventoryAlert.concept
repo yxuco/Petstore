@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" folder="/Concepts/" name="InventoryAlert" description="" GUID="E2A61F47-0638-078E-0B8C-7BC1498A327E" ownerProjectName="Petstore" superConceptPath="" autoStartStateMachine="true">
+  <extendedProperties/>
+  <properties name="sku" ownerProjectName="Petstore"/>
+  <properties name="threshold" ownerProjectName="Petstore" type="long"/>
+  <properties name="description" ownerProjectName="Petstore"/>
+</element:Concept>

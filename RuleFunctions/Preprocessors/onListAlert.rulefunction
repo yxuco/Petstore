@@ -1,0 +1,33 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Preprocessors.onListAlert {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.ListAlert evt;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.Preprocessors.onListAlert");
+		Concepts.Admin admin = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Admin"), "/Concepts/Admin");
+		String payload = "[]";
+		if (admin != null && admin.alerts@length > 0) {
+			Log.log(logger, "info", "List %d inventory alerts", admin.alerts@length);
+			Object buff = String.createBuffer(300);
+			String.append(buff, "[");
+			for (int i = 0; i < admin.alerts@length; i++) {
+				String.append(buff, String.format("\"%s\"", RuleFunctions.alertToString(admin.alerts[i])));
+				if (i != admin.alerts@length-1) {
+					String.append(buff, ",");
+				}
+			}
+			String.append(buff, "]");
+			payload = String.convertBufferToString(buff);
+		} else {
+			Log.log(logger, "info", "No inventory alert is found");
+		}
+		Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null, payload, "200"));
+		Event.consumeEvent(evt);
+	}
+}

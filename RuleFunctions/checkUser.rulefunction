@@ -1,0 +1,37 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.checkUser {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.User user;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.checkUser");
+		VirtualRF.UserData data = VirtualRF.UserData.UserData(
+			null /*extId String */,
+			user.name /*name String */,
+			user.status /*status String */,
+			user.orders@length /*orderCount long */,
+			user.rewardPoints /*rewardPoints long */,
+			0 /*discountPercent long */);
+		VirtualRF.userStatusVRF(data);
+		Log.log(logger, "info", "Check user %s: status %s, %d orders, reward points %d, new status: %s, discount %d%%", 
+			user.name, user.status, data.orderCount, user.rewardPoints, data.status, data.discountPercent);
+			
+		if (user.status != data.status) {
+			// update user status and coupons
+			user.status = data.status;
+			user.coupons[user.coupons@length] = Concepts.Coupon.Coupon(
+				null /*extId String */,
+				System.currentTimeMillis() /*couponId long */,
+				user.name /*owner String */,
+				data.discountPercent /*discountPct long */,
+				DateTime.addDay(Date.today(), 30) /*expiring DateTime */);
+			Log.log(logger, "info", "User %s achieved new status %s, added coupon with discount %d%%", user.name, user.status, data.discountPercent);
+		}
+		Instance.deleteInstance(data);
+	}
+}

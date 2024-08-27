@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="ReloadInventory" description="" GUID="75A1F48D-AB4D-2920-AF6A-A22A8805E5CB" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="inventoryReload">
+  <expiryAction name="ReloadInventory_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="reloadinventory" type="/Events/ReloadInventory"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

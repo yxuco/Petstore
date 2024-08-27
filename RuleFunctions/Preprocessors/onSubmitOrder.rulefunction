@@ -1,0 +1,32 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Preprocessors.onSubmitOrder {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.SubmitOrder evt;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.Preprocessors.onSubmitOrder");
+		
+		Concepts.ShoppingCart cart = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("ShoppingCart")+evt.user, "/Concepts/ShoppingCart");
+		if (cart == null) {
+			Log.log(logger, "info", "Shopping cart of %s does not exist", evt.user);
+			// reply 404 Shopping cart not found
+			Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null, null, "404"));
+			Event.consumeEvent(evt);
+			return;
+		}
+		
+		if (cart.items@length == 0) {
+			Log.log(logger, "info", "Shopping cart of %s is empty", evt.user);
+			// reply 400 Shopping cart is empty
+			Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null, null, "400"));
+			Event.consumeEvent(evt);
+			return;
+		}
+		Log.log(logger, "info", "Creating new order for user %s", evt.user);
+	}
+}

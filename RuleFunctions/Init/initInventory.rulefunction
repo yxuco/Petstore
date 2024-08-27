@@ -1,0 +1,23 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.Init.initInventory {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String[] prods;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.Init.initInventory");
+		String prefix = RuleFunctions.extIdPrefix("Inventory");
+		String prodPrefix = RuleFunctions.extIdPrefix("Product");
+		for (int i = 0; i < prods@length; i++) {
+			Concepts.Product p = Instance.getByExtIdByUri(prodPrefix+prods[i], "/Concepts/Product");
+			if (p != null) {
+				Log.log(logger, "info", "add 10 items of %s to inventory", p.sku);
+				Concepts.Inventory.Inventory(prefix+p.sku,p.sku,10,0);
+			}
+		}
+	}
+}

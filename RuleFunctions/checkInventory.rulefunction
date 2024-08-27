@@ -1,0 +1,45 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.checkInventory {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Inventory inv;
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.checkInventory");
+		Concepts.Product prod = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Product")+inv.sku, "/Concepts/Product");
+		VirtualRF.InventoryData data = VirtualRF.InventoryData.InventoryData(
+			null /*extId String */,
+			inv.sku /*sku String */,
+			prod.rating /*rating double */,
+			0 /*minInStock long */);
+		VirtualRF.InventoryThresholdVRF(data);
+		Log.log(logger, "info", "Check inventory %s, rating: %.1f, inStock: %d, min: %d", inv.sku, prod.rating, inv.inStock, data.minInStock);
+
+		if (inv.inStock < data.minInStock) {
+			// update inventory alert
+			Concepts.InventoryAlert alert = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("InventoryAlert")+inv.sku, "/Concepts/InventoryAlert");
+			if (alert == null) {
+				alert = Concepts.InventoryAlert.InventoryAlert(
+					RuleFunctions.extIdPrefix("InventoryAlert")+inv.sku /*extId String */,
+					inv.sku /*sku String */,
+					data.minInStock /*threshold long */,
+					"Inventory lower than thresold" /*description String */);
+				Concepts.Admin admin = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Admin"), "/Concepts/Admin");
+				if (admin == null) {
+					admin = Concepts.Admin.Admin(
+						RuleFunctions.extIdPrefix("Admin") /*extId String */,
+						Concepts.InventoryAlert[]{} /*alerts Concepts.InventoryAlert[] */);
+				}
+				admin.alerts[admin.alerts@length] = alert;
+			} else {
+				alert.threshold = data.minInStock;
+			}
+			Log.log(logger, "info", "Alert: Inventory of %s in-stock %d lower than min %d", inv.sku, inv.inStock, data.minInStock);
+		}
+		Instance.deleteInstance(data);
+	}
+}

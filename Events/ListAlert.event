@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="ListAlert" description="" GUID="84985891-D23F-6131-E462-D6C9831472EB" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="inventoryAlerts">
+  <expiryAction name="ListAlert_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="listalert" type="/Events/ListAlert"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

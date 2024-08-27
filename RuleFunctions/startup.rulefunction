@@ -1,0 +1,17 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.startup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("RuleFunctions.startup");
+		String[] prods = RuleFunctions.Init.initProducts();
+		RuleFunctions.Init.initInventory(prods);
+		Log.log(logger, "info", "Completed initialization");
+	}
+}

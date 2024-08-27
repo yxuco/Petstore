@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Petstore
+  version: 1.0.0
+  contact:
+    name: Petstore
+servers:
+- url: http://localhost:8020/api
+  x-sharedResourceName: /SharedResources/http.sharedhttp
+tags:
+- name: petstore
+  description: Operations on shopping cart and inventory
+paths:
+  /petstore/addItemToCart:
+    x-channel-name: petstore
+    post:
+      tags:
+      - petstore
+      summary: Add an item to a user's shopping cart
+      description: Add an item to a user's shopping cart
+      x-default-event: /Events/AddItemToCart
+      operationId: addItemToCart_post
+      parameters:
+      - name: user
+        in: query
+        required: true
+        schema:
+          type: string
+          example: alice
+      - name: sku
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - '5348529'
+          - '5348538'
+          - '5348534'
+          - '5349265'
+          - '5349240'
+          - '5348531'
+          - '5348537'
+          - '5348536'
+          - '5285954'
+          - '5286046'
+          - '5116698'
+          - '5307243'
+      - name: unit
+        in: query
+        required: true
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'         
+        '404':
+          description: Product not found
+        '422':
+          description: Validation exception
+  /petstore/submitOrder:
+    x-channel-name: petstore
+    post:
+      tags:
+      - petstore
+      summary: Submit order from a user's shopping cart
+      description: Submit order from a user's shopping cart
+      x-default-event: /Events/SubmitOrder
+      operationId: submitOrder_post
+      parameters:
+      - name: user
+        in: query
+        required: true
+        schema:
+          type: string
+          example: alice
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Shopping cart is empty
+        '404':
+          description: Shopping cart not found
+        '422':
+          description: Validation exception
+  /petstore/inventoryReload:
+    x-channel-name: petstore
+    post:
+      tags:
+      - petstore
+      summary: Reload inventory and clean up alerts
+      description: Reload inventory and clean up alerts
+      x-default-event: /Events/ReloadInventory
+      operationId: inventoryReload_post
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /petstore/inventoryList:
+    x-channel-name: petstore
+    get:
+      tags:
+      - petstore
+      summary: List inventory items
+      description: List inventory items
+      x-default-event: /Events/ListInventory
+      operationId: inventoryList_get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /petstore/inventoryAlerts:
+    x-channel-name: petstore
+    get:
+      tags:
+      - petstore
+      summary: List inventory alerts
+      description: List inventory alerts
+      x-default-event: /Events/ListAlert
+      operationId: inventoryAlerts_get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    Cart:
+      type: object
+      xml:
+        name: cart
+      properties:
+        user:
+          type: string
+        amount:
+          type: number
+        items:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      xml:
+        name: user
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+        rewards:
+          type: integer
+        orders:
+          type: integer
+        coupons:
+          type: array
+          items:
+            type: string

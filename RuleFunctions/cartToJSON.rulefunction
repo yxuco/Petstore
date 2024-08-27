@@ -1,0 +1,25 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.cartToJSON {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.ShoppingCart cart;
+	}
+	body {
+		Object buff = String.createBuffer(300);
+		String.append(buff, String.format("{\"user\":\"%s\",", cart.userName));
+		String.append(buff, String.format("\"amount\":%.2f,", cart.amount));
+		String.append(buff, "\"items\":[");
+		for (int i = 0; i < cart.items@length; i++) {
+			String.append(buff, String.format("\"%s\"", RuleFunctions.itemToString(cart.items[i])));
+			if (i != cart.items@length-1) {
+				String.append(buff, ",");
+			}
+		}
+		String.append(buff, "]}");
+		return String.convertBufferToString(buff);
+	}
+}

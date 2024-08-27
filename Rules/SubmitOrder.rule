@@ -1,0 +1,54 @@
+/**
+ * @description 
+ * @author Pro-Branes.local
+ */
+rule Rules.SubmitOrder {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.SubmitOrder evt;
+		Concepts.ShoppingCart cart;
+	}
+	when {
+		evt.user == cart.userName;
+	}
+	then {
+		Object logger = Log.getLogger("Rules.SubmitOrder");
+		
+		Concepts.User user = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("User")+evt.user, "/Concepts/User");
+		Concepts.PurchaseOrder order = Concepts.PurchaseOrder.PurchaseOrder(
+			null /*extId String */,
+			System.currentTimeMillis() /*orderId long */,
+			Date.today() /*purchaseDate DateTime */,
+			Concepts.OrderItem[]{} /*items Concepts.OrderItem[] */,
+			cart.amount /*amount double */);
+		user.orders[user.orders@length] = order;
+		user.rewardPoints += Math.round(cart.amount*10);
+		// Log.log(logger, "info", "User %s made new purchase, total rewards: %d", user.name, user.rewardPoints);
+		checkUser(user);
+		
+		for (int i = 0; i < cart.items@length; i++) {
+			Concepts.ShoppingItem item = cart.items[i];
+			order.items[order.items@length] = Concepts.OrderItem.OrderItem(
+				null /*extId String */,
+				item.sku /*sku String */,
+				item.unit /*unit long */,
+				item.amount /*amount double */);
+			Concepts.Inventory inv = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Inventory")+item.sku, "/Concepts/Inventory");
+			inv.inStock -= item.unit;
+			// Log.log(logger, "info", "Inventory of %s reduced to %d", inv.sku, inv.inStock);
+			checkInventory(inv);
+		}
+		Log.log(logger, "info", "Processed new order of amount %.2f from user %s", cart.amount, evt.user);
+		
+		// cleanup shopping cart
+		while (cart.items@length > 0) {
+			Instance.PropertyArray.removeContainedConcept(cart.items, cart.items[0]);
+		}
+		cart.amount = 0.0;
+		Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null,RuleFunctions.userToJSON(user),"200"));
+		Event.consumeEvent(evt);
+	}
+}

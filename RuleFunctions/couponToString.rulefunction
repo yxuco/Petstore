@@ -1,0 +1,15 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.couponToString {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Coupon coupon;
+	}
+	body {
+		return String.format("#%d: discount: %d%%, expire on %s", 
+			coupon.couponId, coupon.discountPct, DateTime.format(coupon.expiring, "yyyy-MM-dd"));
+	}
+}

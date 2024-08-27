@@ -1,0 +1,38 @@
+/**
+ * @description 
+ * @author Pro-Branes.local
+ */
+rule Rules.ReloadInventory {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.ReloadInventory evt;
+	}
+	when {
+		
+	}
+	then {
+		Object logger = Log.getLogger("Rules.ReloadInventory");
+		String[] skus = RuleFunctions.productList();
+		
+		// reset inventory instock to 10
+		for (int i = 0; i < skus@length; i++) {
+			Concepts.Inventory inv = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Inventory")+skus[i], "/Concepts/Inventory");
+			inv.inStock = 10;
+		}
+		
+		// remove existing inventory alerts
+		Concepts.Admin admin = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Admin"), "/Concepts/Admin");
+		if (admin != null) {
+			while (admin.alerts@length > 0) {
+				Instance.PropertyArray.removeContainedConcept(admin.alerts, admin.alerts[0]);
+			}
+		}
+		
+		Log.log(logger, "info", "Reloaded %d inventory items", skus@length);
+		Event.replyEvent(evt, Events.HTTPStatus.HTTPStatus(null, RuleFunctions.inventoryToJSON(skus), "200"));
+		Event.consumeEvent(evt);
+	}
+}

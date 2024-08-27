@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.itemToString {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.ShoppingItem item;
+	}
+	body {
+		return String.format("#%s: %d units, $%.2f", item.sku, item.unit, item.amount);
+	}
+}

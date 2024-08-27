@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="SubmitOrder" description="" GUID="A4B09BAB-0157-A799-D2E3-0B68CC1994E2" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="submitOrder">
+  <properties name="user" ownerProjectName="Petstore"/>
+  <expiryAction folder="/Events/SubmitOrder" name="SubmitOrder_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="submitorder" type="/Events/SubmitOrder"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="InventoryThresholdDT" folder="/VirtualRF/" implements="/VirtualRF/InventoryThresholdVRF" since="BE 4.0">
+  <decisionTable>
+    <rule id="1">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <cond id="1_1" colId="1" expr="&lt;= 4.5"/>
+      <act id="1_2" colId="2" expr="2"/>
+    </rule>
+    <rule id="2">
+      <md>
+        <prop name="Description" type="String" value=""/>
+        <prop name="Priority" type="Integer" value="5"/>
+      </md>
+      <cond id="2_1" colId="1" expr="> 4.5"/>
+      <act id="2_2" colId="2" expr="4"/>
+    </rule>
+    <columns>
+      <column id="1" name="v.rating" propertyPath="/VirtualRF/InventoryData/rating" propertyType="3" columnType="CONDITION"/>
+      <column id="2" name="v.minInStock" propertyPath="/VirtualRF/InventoryData/minInStock" propertyType="2" columnType="ACTION"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/VirtualRF/InventoryData" alias="v" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

@@ -1,0 +1,14 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.alertToString {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.InventoryAlert alert;
+	}
+	body {
+		return String.format("#%s %s %d", alert.sku, alert.description, alert.threshold);
+	}
+}

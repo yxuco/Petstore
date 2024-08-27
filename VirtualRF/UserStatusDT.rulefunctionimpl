@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Table="http:///com/tibco/cep/decision/table/model/DecisionTable.ecore" name="UserStatusDT" folder="/VirtualRF/" implements="/VirtualRF/userStatusVRF" since="BE 4.0">
+  <decisionTable>
+    <rule id="1">
+      <cond id="1_2" colId="2" expr="&lt; 200"/>
+      <cond id="1_4" colId="4" expr=">= 3"/>
+      <act id="1_3" colId="3" expr="&quot;silver&quot;"/>
+      <act id="1_5" colId="5" expr="5"/>
+    </rule>
+    <rule id="2">
+      <cond id="2_2" colId="2" expr=">= 200 &amp;&amp; &lt; 500"/>
+      <act id="2_3" colId="3" expr="&quot;silver&quot;"/>
+      <act id="2_5" colId="5" expr="5"/>
+    </rule>
+    <rule id="3">
+      <cond id="3_2" colId="2" expr=">= 500 &amp;&amp; &lt; 1000"/>
+      <act id="3_3" colId="3" expr="&quot;gold&quot;"/>
+      <act id="3_5" colId="5" expr="10"/>
+    </rule>
+    <rule id="4">
+      <cond id="4_2" colId="2" expr=">= 1000"/>
+      <act id="4_3" colId="3" expr="&quot;platinum&quot;"/>
+      <act id="4_5" colId="5" expr="15"/>
+    </rule>
+    <columns>
+      <column id="2" name="u.rewardPoints" propertyPath="/VirtualRF/UserData/rewardPoints" propertyType="2" columnType="CONDITION"/>
+      <column id="4" name="u.orderCount" propertyPath="/VirtualRF/UserData/orderCount" propertyType="2" columnType="CONDITION"/>
+      <column id="3" name="u.status" propertyPath="/VirtualRF/UserData/status" columnType="ACTION"/>
+      <column id="5" name="u.discountPercent" propertyPath="/VirtualRF/UserData/discountPercent" propertyType="2" columnType="ACTION"/>
+    </columns>
+  </decisionTable>
+  <exceptionTable/>
+  <argument direction="BOTH">
+    <property path="/VirtualRF/UserData" alias="u" resourceType="CONCEPT"/>
+  </argument>
+</Table:Table>

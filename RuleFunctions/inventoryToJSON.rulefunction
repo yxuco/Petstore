@@ -1,0 +1,25 @@
+/**
+ * @description 
+ */
+String rulefunction RuleFunctions.inventoryToJSON {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String[] skus;
+	}
+	body {
+		Object buff = String.createBuffer(300);
+		String.append(buff, "[");
+		for (int i = 0; i < skus@length; i++) {
+			Concepts.Inventory inv = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Inventory")+skus[i], "/Concepts/Inventory");
+			Concepts.Product prod = Instance.getByExtIdByUri(RuleFunctions.extIdPrefix("Product")+skus[i], "/Concepts/Product");
+			String.append(buff, String.format("\"#%s: in-stock %d, unit-price %.2f, rating %.1f, %s\"", inv.sku, inv.inStock, prod.price, prod.rating, prod.title));
+			if (i != skus@length-1) {
+				String.append(buff, ",");
+			}
+		}
+		String.append(buff, "]");
+		return String.convertBufferToString(buff);
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" folder="/Concepts/" name="OrderItem" description="" GUID="527263DF-7D5B-5429-D726-9578B3742A3F" ownerProjectName="Petstore" superConceptPath="/Concepts/ShoppingItem" autoStartStateMachine="true">
+  <extendedProperties/>
+</element:Concept>
