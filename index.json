@@ -1,0 +1,25 @@
+{
+    "entries": [
+        {
+            "name": "concept",
+            "path": "Concepts/Product.concept",
+            "type": "concept"
+        },
+        {
+            "name": "event",
+            "path": "Events/HTTPStatus.event",
+            "type": "event"
+        },
+        {
+            "name": "rule",
+            "path": "Rules/AddItemToCart.rule",
+            "type": "rule"
+        },
+        {
+            "name": "rdbms",
+            "path": "TestData/FunctionSamples/rdbmFunctions.rulefunction",
+            "type": "function"
+        }
+    ],
+    "types": []
+}
