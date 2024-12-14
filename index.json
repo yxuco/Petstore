@@ -16,6 +16,11 @@
             "type": "rule"
         },
         {
+            "name": "function",
+            "path": "RuleFunctions/Preprocessors/onAddItemToCart.rulefunction",
+            "type": "function"
+        },
+        {
             "name": "rdbms",
             "path": "TestData/FunctionSamples/rdbmFunctions.rulefunction",
             "type": "function"
