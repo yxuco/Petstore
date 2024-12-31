@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="ListInventory" description="" GUID="BA586E1D-4820-806D-1BB4-561B41C39379" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="inventoryList">
-  <expiryAction name="ListInventory_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
-    <symbols>
-      <symbolList idName="listinventory" type="/Events/ListInventory"/>
-    </symbols>
-  </expiryAction>
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="ListInventory" description="" GUID="BA586E1D-4820-806D-1BB4-561B41C39379" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="inventoryList">
+    <expiryAction name="ListInventory_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="listinventory" type="/Events/ListInventory"/>
+        </symbols>
+    </expiryAction>
 </event:SimpleEvent>

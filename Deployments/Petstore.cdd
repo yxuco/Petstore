@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>19</version>
+        <version>20</version>
         <author>yxu</author>
-        <date>2024/06/04 10:54:46</date>
+        <date>2024/12/30 16:25:38</date>
         <comment/>
     </revision>
     <name>Petstore</name>
@@ -179,8 +179,8 @@
         <property name="be.http.json.rootElement.ignore" value="true"/>
         <property-group comment="" name="auth">
             <property name="be.mm.auth.type" value="file"/>
-            <property name="be.mm.auth.file.location" value="/Users/yxu/tibco/be63/be/6.3/mm/config/users.pwd"/>
-            <property name="java.security.auth.login.config" value="/Users/yxu/tibco/be63/be/6.3/mm/config/jaas-config.config"/>
+            <property name="be.mm.auth.file.location" value="/Users/yxu/tibco/be/6.3/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="/Users/yxu/tibco/be/6.3/mm/config/jaas-config.config"/>
         </property-group>
     </property-group>
 </cluster>

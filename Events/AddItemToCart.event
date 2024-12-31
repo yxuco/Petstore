@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="AddItemToCart" description="" GUID="0C6C565A-A751-AC96-07CD-E7B65C9E45F1" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="addItemToCart">
-  <properties name="user" ownerProjectName="Petstore"/>
-  <properties name="sku" ownerProjectName="Petstore"/>
-  <properties name="unit" ownerProjectName="Petstore" type="long"/>
-  <expiryAction folder="/Events/AddItemToCart" name="AddItemToCart_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
-    <symbols>
-      <symbolList idName="additemtocart" type="/Events/AddItemToCart"/>
-    </symbols>
-  </expiryAction>
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="AddItemToCart" description="" GUID="0C6C565A-A751-AC96-07CD-E7B65C9E45F1" ownerProjectName="Petstore" superEventPath="" ttlUnits="Seconds" channelURI="/api/petstore" destinationName="addItemToCart">
+    <properties name="user" ownerProjectName="Petstore" ownerPath="/Events/AddItemToCart"/>
+    <properties name="sku" ownerProjectName="Petstore" ownerPath="/Events/AddItemToCart"/>
+    <properties name="unit" ownerProjectName="Petstore" type="long" ownerPath="/Events/AddItemToCart"/>
+    <expiryAction folder="/Events/AddItemToCart" name="AddItemToCart_expiryAction" ownerProjectName="Petstore" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="additemtocart" type="/Events/AddItemToCart"/>
+        </symbols>
+    </expiryAction>
 </event:SimpleEvent>

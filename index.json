@@ -2,28 +2,69 @@
     "entries": [
         {
             "name": "concept",
-            "path": "Concepts/Product.concept",
+            "path": [
+                "Concepts/SampleEntity.concept",
+                "Concepts/SampleChild.concept"
+            ],
             "type": "concept"
         },
         {
             "name": "event",
-            "path": "Events/HTTPStatus.event",
+            "path": [
+                "Events/HTTPStatus.event",
+                "Events/SampleCreateEntity.event"
+            ],
             "type": "event"
         },
         {
             "name": "rule",
-            "path": "Rules/AddItemToCart.rule",
+            "path": [
+                "Rules/SampleUpdateEntity.rule"
+            ],
             "type": "rule"
         },
         {
-            "name": "function",
-            "path": "RuleFunctions/Preprocessors/onAddItemToCart.rulefunction",
+            "name": "preprocessor",
+            "path": [
+                "RuleFunctions/Preprocessors/onSampleCreateEntity.rulefunction"
+            ],
+            "type": "function"
+        },
+        {
+            "name": "standard",
+            "path": [
+                "RuleFunctions/sampleFilesFunc.rulefunction"
+            ],
             "type": "function"
         },
         {
             "name": "rdbms",
-            "path": "TestData/FunctionSamples/rdbmFunctions.rulefunction",
+            "path": [
+                "RuleFunctions/sampleRdbmsFunc.rulefunction"
+            ],
             "type": "function"
+        },
+        {
+            "name": "channel",
+            "path": [
+                "Channels/sample.channel"
+            ],
+            "type": "channel"
+        },
+        {
+            "name": "cdd",
+            "path": [
+                "Deployments/sample.cdd"
+            ],
+            "type": "cdd"
+        },
+        {
+            "name": "resource",
+            "path": [
+                "SharedResources/sampleHttp.sharedhttp",
+                "SharedResources/sampleJdbc.sharedjdbc"
+            ],
+            "type": "resource"
         }
     ],
     "types": []
